@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: prescripto
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
