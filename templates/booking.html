@@ -1,0 +1,59 @@
+{% extends "general-layout.html" %}
+{% block body %}
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <div class="card-body">
+
+                    <h3 class="mb-3">Book Appointment</h3>
+                    <hr>
+
+                    <div class="row">
+
+                        <!-- Doctor Info -->
+                        <div class="col-md-4 text-center">
+                            <img src="{{ url_for('static', filename='assets/img/doctors/' + doctor.doctor_image) }}"
+                                 class="img-fluid rounded mb-3" alt="Doctor Image">
+
+                            <h4>{{ doctor.name }}</h4>
+                            <p class="text-muted">{{ doctor.speciality }}</p>
+
+                            <p><i class="fa fa-map-marker-alt"></i> {{ doctor.location }}</p>
+                            <p><i class="fa fa-money-bill"></i> ₹{{ doctor.fee }}</p>
+                        </div>
+
+                        <!-- Booking Form -->
+                        <div class="col-md-8">
+                            <form method="POST" action="/booking/{{ doctor.slug }}">
+                                <div class="form-group">
+                                    <label><strong>Choose Date</strong></label>
+                                    <input type="date" class="form-control" name="date" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label><strong>Choose Time</strong></label>
+                                    <input type="time" class="form-control" name="time" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label><strong>Message (optional)</strong></label>
+                                    <textarea class="form-control" rows="3" name="message"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block mt-3">
+                                    Confirm Booking
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

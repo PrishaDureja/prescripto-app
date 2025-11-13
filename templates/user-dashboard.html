@@ -1,0 +1,78 @@
+{% extends "user-layout.html" %}
+{% block body %}
+
+<!-- Book Doctor Section -->
+<section class="section section-doctor">
+    <div class="container-fluid">
+
+        <h3 class="mb-4">Book Our Doctor</h3>
+
+        <div class="row">
+
+            {% for doctor in doctors %}
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                <div class="profile-widget" style="border-radius: 12px; overflow: hidden;">
+
+                    <!-- Doctor Image -->
+                    <div class="doc-img" 
+                         style="
+                            height: 230px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background: #ffffff;
+                            border-bottom: 1px solid #eee;
+                         ">
+                        <a href="/doctor-profile/{{ doctor.slug }}">
+                            <img class="img-fluid"
+                                 src="{{ url_for('static', filename='assets/img/doctors/' + doctor.doctor_image) }}"
+                                 alt="{{ doctor.name }}"
+                                 style="max-height: 210px; width: auto; object-fit: contain;">
+                        </a>
+                    </div>
+
+                    <!-- Doctor Content -->
+                    <div class="pro-content" style="padding: 18px;">
+
+                        <h3 class="title" style="font-size: 18px; margin-bottom: 4px;">
+                            <a href="/doctor-profile/{{ doctor.slug }}">{{ doctor.name }}</a>
+                            <i class="fas fa-check-circle verified"></i>
+                        </h3>
+
+                        <p class="speciality" style="font-size: 13px; color: #6c757d;">
+                            {{ doctor.speciality }}
+                        </p>
+
+                        <ul class="available-info" style="margin-top: 12px;">
+                            <li style="margin-bottom: 4px;">
+                                <i class="fas fa-map-marker-alt"></i> {{ doctor.location }}
+                            </li>
+                            <li>
+                                <i class="far fa-money-bill-alt"></i> ₹{{ doctor.fee }}
+                            </li>
+                        </ul>
+
+                        <div class="row row-sm" style="margin-top: 12px;">
+                            <div class="col-6">
+                                <a href="/doctor-profile/{{ doctor.slug }}" 
+                                   class="btn view-btn w-100"
+                                   style="padding: 6px 0;">View</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="/booking/{{ doctor.slug }}" 
+                                   class="btn book-btn w-100"
+                                   style="padding: 6px 0;">Book</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

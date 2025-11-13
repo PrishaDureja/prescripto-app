@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Doccure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+
+    <!-- Favicons -->
+    <link type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" />
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='assets/plugins/fontawesome/css/fontawesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/all.min.css') }}" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
+
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <header class="header">
+            <nav class="navbar navbar-expand-lg header-nav">
+
+                <div class="navbar-header">
+                    <a id="mobile_btn" href="javascript:void(0);">
+                        <span class="bar-icon"><span></span><span></span><span></span></span>
+                    </a>
+                    <a href="/" class="navbar-brand logo">
+                        <img src="{{ url_for('static', filename='assets/img/logo.png') }}" class="img-fluid" alt="Logo">
+                    </a>
+                </div>
+
+                <div class="main-menu-wrapper">
+                    <ul class="main-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/search">Search Doctor</a></li>
+                        <li><a href="/booking">Booking</a></li>
+                    </ul>
+                </div>
+
+                <ul class="nav header-navbar-rht">
+
+                    <!-- User Menu -->
+                    <li class="nav-item dropdown has-arrow logged-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <span class="user-img">
+                                <img class="rounded-circle"
+                                     src="{{ url_for('static', filename='assets/img/patients/patient.jpg') }}"
+                                     width="31" alt="{{ user.name }}">
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+
+                            <div class="user-header">
+                                <div class="avatar avatar-sm">
+                                    <img src="{{ url_for('static', filename='assets/img/patients/patient.jpg') }}"
+                                         class="avatar-img rounded-circle">
+                                </div>
+                                <div class="user-text">
+                                    <h6>{{ user.name }}</h6>
+                                    <p class="text-muted mb-0">Patient</p>
+                                </div>
+                            </div>
+
+                            <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+        </header>
+        <!-- /Header -->
+
+        {% block body %}{% endblock %}
+
+        <!-- Footer -->
+        <footer class="footer">
+
+            <div class="footer-top">
+                <div class="container-fluid">
+                    <p class="text-center mt-3 mb-3">© 2025 Doccure | All Rights Reserved</p>
+                </div>
+            </div>
+
+        </footer>
+        <!-- /Footer -->
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
+
+</body>
+
+</html>

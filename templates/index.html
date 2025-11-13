@@ -1,0 +1,156 @@
+{% extends "general-layout.html" %}
+{% block body %}
+
+<!-- Home Banner -->
+<section class="section section-search">
+    <div class="container-fluid">
+        <div class="banner-wrapper">
+
+            <div class="banner-header text-center">
+                <h1>Search Doctor, Make an Appointment</h1>
+                <p>Discover the best doctors, clinic & hospital near you.</p>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box">
+                <form action="/search">
+
+                    <div class="form-group search-location">
+                        <input type="text" name="location" class="form-control" placeholder="Search Location" />
+                        <span class="form-text">Based on your Location</span>
+                    </div>
+
+                    <div class="form-group search-info">
+                        <input type="text" name="query" class="form-control"
+                            placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc" />
+                        <span class="form-text">Ex : Dental, Cardiology etc</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary search-btn">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </button>
+
+                </form>
+            </div>
+            <!-- /Search -->
+
+        </div>
+    </div>
+</section>
+<!-- /Home Banner -->
+
+
+<!-- Clinic and Specialities -->
+<section class="section section-specialities">
+    <div class="container-fluid">
+
+        <div class="section-header text-center">
+            <h2>Clinic and Specialities</h2>
+            <p class="sub-title">Browse doctors by speciality</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+
+                <div class="specialities-slider slider">
+
+                    {% for i in [1,2,3,4,5] %}
+                    <div class="speicality-item text-center">
+
+                        <div class="speicality-img">
+                            <img src="{{ url_for('static', filename='assets/img/specialities/specialities-0' ~ i ~ '.png') }}"
+                                class="img-fluid" alt="Speciality">
+                            <span><i class="fa fa-circle"></i></span>
+                        </div>
+
+                        <p>{{ ['Urology','Neurology','Orthopedic','Cardiologist','Dentist'][i-1] }}</p>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- /Clinic and Specialities -->
+
+
+<!-- Popular Doctors Section -->
+<section class="section section-doctor">
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Left Section -->
+            <div class="col-lg-4">
+                <div class="section-header">
+                    <h2>Book Our Doctor</h2>
+                    <p>High quality medical professionals available for you</p>
+                </div>
+
+                <div class="about-content">
+                    <p>
+                        Find expert doctors near you. Book appointments easily.
+                    </p>
+                    <p>
+                        100% verified profiles and trusted medical professionals.
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Doctors Slider -->
+            <div class="col-lg-8">
+                <div class="doctor-slider slider">
+
+                    {% for doctor in doctors %}
+                    <div class="profile-widget">
+
+                        <div class="doc-img">
+                            <a href="/doctor-profile/{{ doctor.slug }}">
+                                {% set image = 'assets/img/doctors/' + doctor.doctor_image %}
+                                <img src="{{ url_for('static', filename=image) }}"
+                                    class="img-fluid" alt="{{ doctor.name }}">
+                            </a>
+                        </div>
+
+                        <div class="pro-content">
+
+                            <h3 class="title">
+                                <a href="/doctor-profile/{{ doctor.slug }}">{{ doctor.name }}</a>
+                                <i class="fas fa-check-circle verified"></i>
+                            </h3>
+
+                            <p class="speciality">{{ doctor.speciality }}</p>
+
+                            <ul class="available-info">
+                                <li><i class="fas fa-map-marker-alt"></i> {{ doctor.location }}</li>
+                                <li><i class="far fa-money-bill-alt"></i> ₹{{ doctor.fee }}</li>
+                            </ul>
+
+                            <div class="row row-sm">
+                                <div class="col-6">
+                                    <a href="/doctor-profile/{{ doctor.slug }}" class="btn view-btn">View Profile</a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="/booking/{{ doctor.slug }}" class="btn book-btn">Book Now</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- /Popular Doctors Section -->
+
+{% endblock %}

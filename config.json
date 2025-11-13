@@ -1,0 +1,8 @@
+{
+    "parameters": {
+        "local_uri": "mysql+pymysql://root:@localhost/doctorapp",
+        "host_uri": "mysql+pymysql://root:@localhost/doctorapp",
+        "admin_username": "admin",
+        "admin_password": "admin"
+    }
+}
