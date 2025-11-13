@@ -13,8 +13,12 @@ app = Flask(__name__)
 app.secret_key = 'secretkey'
 
 # DB connection
-app.config["SQLALCHEMY_DATABASE_URI"] = parameters['local_uri']
+# DB connection
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
+
 
 # -----------------------------------
 # DATABASE MODELS
