@@ -5,19 +5,15 @@ import pymysql
 
 pymysql.install_as_MySQLdb()
 
-# Load config
-with open('config.json', 'r') as c:
-    parameters = json.load(c)['parameters']
-
 app = Flask(__name__)
 app.secret_key = 'secretkey'
 
-# DB connection
-# DB connection
+# --- USE SQLITE ON RENDER ---
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
 
 
 # -----------------------------------
