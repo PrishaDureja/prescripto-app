@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-import json
 import pymysql
 
 pymysql.install_as_MySQLdb()
@@ -8,12 +7,11 @@ pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 app.secret_key = 'secretkey'
 
-# --- USE SQLITE ON RENDER ---
+# Use SQLite for Render
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-
 
 
 # -----------------------------------
@@ -58,7 +56,7 @@ class Appointments(db.Model):
 @app.route("/")
 def home():
     doctors = Doctors.query.all()
-    return render_template("index.html", parameters=parameters, doctors=doctors)
+    return render_template("index.html", doctors=doctors)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -71,7 +69,6 @@ def register():
 
         if Patients.query.filter_by(email=email).first():
             return "⚠️ Email already registered!"
-
         if Patients.query.filter_by(phone_number=phone_number).first():
             return "⚠️ Phone already registered!"
 
@@ -81,7 +78,7 @@ def register():
 
         return redirect(url_for("login"))
 
-    return render_template("register.html", parameters=parameters)
+    return render_template("register.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -98,7 +95,7 @@ def login():
 
         return render_template("login.html", error="Invalid email or password")
 
-    return render_template("login.html", parameters=parameters)
+    return render_template("login.html")
 
 
 @app.route("/dashboard")
@@ -169,7 +166,7 @@ def booking_success():
 
 
 # -----------------------------------
-# ADMIN ROUTES (FINAL WORKING)
+# ADMIN ROUTES
 # -----------------------------------
 
 ADMIN_USERNAME = "admin"
@@ -184,8 +181,8 @@ def admin_login():
         if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
             session["admin"] = True
             return redirect("/admin-dashboard")
-        else:
-            return render_template("admin-login.html", error="Invalid admin credentials")
+
+        return render_template("admin-login.html", error="Invalid admin credentials")
 
     return render_template("admin-login.html")
 
