@@ -1,14 +1,8 @@
-# CSE470 Project
+
 
 ## Project Title
 
 Doctor Appointment App
-
-## Student Info
-
-Name: Tasin Mohammad <br />
-ID: 20341021 <br />
-Section: 7
 
 ## Requirements & Features
 
